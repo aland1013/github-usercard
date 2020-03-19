@@ -17,9 +17,10 @@ console.log('axiosPromise', axiosPromise);
 */
 axios.get('https://api.github.com/users/aland1013')
   .then(response => {
-    const newCard = cardCreator(response.data);
-    document.querySelector('.cards').appendChild(newCard);
-  })
+    // const newCard = cardCreator(response.data);
+    // document.querySelector('.cards').appendChild(newCard);
+    createNewCard(response.data);
+  });
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -31,7 +32,13 @@ axios.get('https://api.github.com/users/aland1013')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+followersArray.forEach(user => {
+  axios.get('https://api.github.com/users/' + user)
+    .then(response => {
+      createNewCard(response.data);
+    })
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -86,6 +93,11 @@ const cardCreator = (obj) => {
   card.append(img, cardInfo);
 
   return card;
+}
+
+const createNewCard = (data) => {
+  const newCard = cardCreator(data);
+    document.querySelector('.cards').appendChild(newCard);
 }
 
 /* List of LS Instructors Github username's: 
