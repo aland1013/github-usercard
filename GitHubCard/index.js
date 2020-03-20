@@ -22,6 +22,7 @@ axios.get('https://api.github.com/users/aland1013')
     createNewCard(response.data);
   });
 
+
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -37,8 +38,8 @@ followersArray.forEach(user => {
   axios.get('https://api.github.com/users/' + user)
     .then(response => {
       createNewCard(response.data);
-    })
-})
+    });
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -83,7 +84,7 @@ const cardCreator = (obj) => {
   location.textContent = `Location: ${obj.location}`;
   anchor.href = obj.html_url;
   anchor.textContent = `${obj.html_url}`;
-  profile.innerHTML = 'Profile:<br>';
+  profile.textContent = 'Profile: ';
   followers.textContent = `Followers: ${obj.followers}`;
   following.textContent = `Following: ${obj.following}`;
   bio.textContent = `${obj.bio}`;
